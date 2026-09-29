@@ -71,8 +71,11 @@ public class WebSecurityConfig {
                     // RBAC: HR + Admin
                     .requestMatchers("/api/hr/**").hasAnyRole("ADMIN", "HR")
 
-                    // Everything else requires authentication (role checks via @PreAuthorize)
-                    .anyRequest().authenticated()
+                    // All other API endpoints require authentication
+                    .requestMatchers("/api/**").authenticated()
+                    
+                    // Permit all other requests (this allows the React frontend static files to load)
+                    .anyRequest().permitAll()
             );
 
         http.headers(headers -> headers.frameOptions(frame -> frame.disable())); // For H2 console
