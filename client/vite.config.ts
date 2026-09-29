@@ -4,8 +4,8 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  // Use relative paths for Capacitor (assets loaded from file:// in WebView)
-  base: './',
+  // Use absolute paths for web deployment, Capacitor builds override this
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
