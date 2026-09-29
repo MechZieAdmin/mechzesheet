@@ -46,14 +46,10 @@ public class DataLoader implements CommandLineRunner {
         if (userRepository.count() == 0) {
             logger.info("Seeding database...");
 
-            // 1. Create Employees
-            Employee emp1 = createEmployee("MZ-001", "Rahul Kumar", "Engineering", "Senior Mechanical Engineer", "rahul.kumar@mechzie.com");
-            Employee emp2 = createEmployee("MZ-002", "Priya Sharma", "Engineering", "Design Engineer", "priya.sharma@mechzie.com");
-            Employee emp3 = createEmployee("MZ-003", "Amit Patel", "Operations", "Production Supervisor", "amit.patel@mechzie.com");
+
 
             // 2. Create Users
             String adminPassword = passwordEncoder.encode("Admin@123");
-            String employeePassword = passwordEncoder.encode("Employee@123");
 
             // Admin
             User admin = new User();
@@ -69,10 +65,7 @@ public class DataLoader implements CommandLineRunner {
             hr.setRole(User.Role.HR);
             userRepository.save(hr);
 
-            // Employees
-            createUser(emp1, employeePassword);
-            createUser(emp2, employeePassword);
-            createUser(emp3, employeePassword);
+
 
             // 3. Leave Types
             LeaveType casualLeave = createLeaveType("Casual Leave");
@@ -81,12 +74,6 @@ public class DataLoader implements CommandLineRunner {
 
             // 4. Leave Balances for current year
             int currentYear = LocalDate.now().getYear();
-            List<Employee> employees = List.of(emp1, emp2, emp3);
-            for (Employee emp : employees) {
-                createLeaveBalance(emp, casualLeave, currentYear, 12);
-                createLeaveBalance(emp, sickLeave, currentYear, 10);
-                createLeaveBalance(emp, earnedLeave, currentYear, 15);
-            }
 
             // 5. Holidays
             createHoliday(LocalDate.of(currentYear, 1, 26), "Republic Day");
@@ -104,12 +91,7 @@ public class DataLoader implements CommandLineRunner {
             createSetting("weekly_offs", "saturday,sunday");
             createSetting("geo_required", "false");
             
-            // 7. Attendance for emp1 for today
-            Attendance att = new Attendance();
-            att.setEmployee(emp1);
-            att.setDate(LocalDate.now());
-            att.setStatus(Attendance.Status.PRESENT);
-            attendanceRepository.save(att);
+
 
             // 8. Announcements
             createAnnouncement("Welcome to MechZie HR!", "We are excited to launch the new enterprise HR portal. Explore your dashboard to track attendance, leaves, and more.", "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800", true);
@@ -118,7 +100,6 @@ public class DataLoader implements CommandLineRunner {
             logger.info("Seed complete!");
             logger.info("Admin: admin@mechzie.com / Admin@123");
             logger.info("HR: hr@mechzie.com / Admin@123");
-            logger.info("Employee: rahul.kumar@mechzie.com / Employee@123");
         }
     }
 
