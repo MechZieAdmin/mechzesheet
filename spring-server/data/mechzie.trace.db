@@ -1,0 +1,10 @@
+2026-09-02 13:16:05.150667+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000a    alter table if exists leave_balances \000a       add constraint UKbt0kj5tlqfwi0vny4dalj5b66 unique (employee_id, leave_type_id, [*]year)"; expected "identifier"; SQL statement:
+
+    alter table if exists leave_balances 
+       add constraint UKbt0kj5tlqfwi0vny4dalj5b66 unique (employee_id, leave_type_id, year) [42001-232]
+2026-09-13 22:48:33.581244+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000a    alter table if exists leave_balances \000a       add constraint UKbt0kj5tlqfwi0vny4dalj5b66 unique (employee_id, leave_type_id, [*]year)"; expected "identifier"; SQL statement:
+
+    alter table if exists leave_balances 
+       add constraint UKbt0kj5tlqfwi0vny4dalj5b66 unique (employee_id, leave_type_id, year) [42001-232]

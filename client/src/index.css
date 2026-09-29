@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   MechZie HR Portal — Premium Dark Theme
+   Design Tokens:
+     Background:  #171717 (page bg)
+     Panel Bg:    #212121 (cards)
+     Primary Text: #ececec
+     Secondary:    #b4b4b4
+     Muted:        #737373
+     Border:       #2f2f2f
+     Accent (CTA): #ececec (light text on dark button) / #383838 (button bg)
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    @apply border-[#2f2f2f];
+  }
+
+  body {
+    @apply bg-gpt-panel text-gpt-light font-sans antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-white;
+  }
+}
+
+@layer components {
+
+  /* ── Buttons ─────────────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg
+           bg-[#ececec] px-4 py-2.5 text-sm font-semibold text-[#171717]
+           shadow-soft transition-all duration-200 ease-out
+           hover:bg-white hover:shadow-soft-hover hover:-translate-y-[1px]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-soft;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg
+           border border-[#2f2f2f] bg-[#212121]/80 backdrop-blur-md px-4 py-2.5
+           text-sm font-medium text-gpt-light shadow-soft transition-all duration-200 ease-out
+           hover:bg-[#2f2f2f] hover:border-[#404040] hover:text-white hover:shadow-soft-hover hover:-translate-y-[1px]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#737373] focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-soft;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg
+           bg-red-900/80 px-4 py-2.5 backdrop-blur-md border border-red-800/50
+           text-sm font-semibold text-red-100 shadow-soft transition-all duration-200 ease-out
+           hover:bg-red-800 hover:shadow-soft-hover hover:-translate-y-[1px] hover:border-red-600/50
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-soft;
+  }
+
+  /* ── Cards ───────────────────────────────────────────────── */
+  .card {
+    @apply rounded-xl border border-[#2f2f2f] bg-[#212121]/70 backdrop-blur-xl p-6 shadow-card transition-all duration-200 relative overflow-hidden;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-soft-hover hover:border-[#404040] hover:bg-[#212121]/90;
+  }
+
+  /* ── Forms ───────────────────────────────────────────────── */
+  .input-field {
+    @apply flex h-11 w-full rounded-lg border border-[#2f2f2f] bg-[#171717]/80 backdrop-blur-md px-4 py-2
+           text-sm text-gpt-light shadow-soft transition-all duration-200 ease-out
+           placeholder:text-[#737373]
+           focus:border-[#ececec] focus:outline-none focus:ring-2 focus:ring-[#ececec]/20
+           disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[#212121];
+  }
+
+  .label {
+    @apply text-sm font-semibold text-gpt-muted mb-1.5 block;
+  }
+
+  /* ── Status Badges — Semantic Colors (Dark Mode Adapted) ─── */
+  .status-badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold tracking-wide uppercase border;
+  }
+
+  /* Attendance statuses */
+  .status-present {
+    @apply status-badge bg-green-950/50 text-green-400 border-green-900/50;
+  }
+  .status-absent {
+    @apply status-badge bg-red-950/50 text-red-400 border-red-900/50;
+  }
+  .status-late {
+    @apply status-badge bg-amber-950/50 text-amber-400 border-amber-900/50;
+  }
+  .status-leave {
+    @apply status-badge bg-blue-950/50 text-blue-400 border-blue-900/50;
+  }
+  .status-holiday {
+    @apply status-badge bg-purple-950/50 text-purple-400 border-purple-900/50;
+  }
+  .status-half-day {
+    @apply status-badge bg-orange-950/50 text-orange-400 border-orange-900/50;
+  }
+
+  /* Leave / approval statuses */
+  .status-approved {
+    @apply status-badge bg-green-950/50 text-green-400 border-green-900/50;
+  }
+  .status-rejected {
+    @apply status-badge bg-red-950/50 text-red-400 border-red-900/50;
+  }
+  .status-pending {
+    @apply status-badge bg-amber-950/50 text-amber-400 border-amber-900/50;
+  }
+
+  /* ── Sidebar ─────────────────────────────────────────────── */
+  .sidebar-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gpt-muted
+           transition-all duration-200 ease-out
+           hover:bg-[#2f2f2f] hover:text-gpt-light;
+  }
+
+  .sidebar-link-active {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold
+           bg-[#ececec] text-[#171717] shadow-soft transition-all duration-200 ease-out;
+  }
+
+  /* ── Skeleton ────────────────────────────────────────────── */
+  .skeleton {
+    @apply animate-pulse rounded-lg bg-[#2f2f2f];
+  }
+
+  /* ── Data Table ──────────────────────────────────────────── */
+  .data-table {
+    @apply w-full text-sm border-collapse;
+  }
+
+  .data-table th {
+    @apply border-b border-[#2f2f2f] bg-[#212121]/50 px-4 py-3 text-left text-xs
+           font-bold uppercase tracking-wider text-gpt-muted backdrop-blur-md;
+  }
+
+  .data-table td {
+    @apply border-b border-[#2f2f2f]/50 px-4 py-3.5 text-gpt-light;
+  }
+
+  .data-table tr {
+    @apply transition-colors duration-150 hover:bg-[#2f2f2f]/30;
+  }
+}
+
+/* ── Custom Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #404040; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #737373; }
+
+/* ── Page Enter Animation ──────────────────────────────────── */
+.page-enter {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1), slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
