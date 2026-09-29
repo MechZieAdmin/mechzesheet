@@ -1,20 +1,15 @@
 package com.mechzie.server.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+@Controller
+public class WebMvcConfig implements ErrorController {
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        // Forward any unmatched paths to the React index.html
-        registry.addViewController("/{spring:\\w+}")
-                .setViewName("forward:/");
-        registry.addViewController("/**/{spring:\\w+}")
-                .setViewName("forward:/");
-        registry.addViewController("/{spring:\\w+}/**{spring:?!(\\.js|\\.css|\\.html|\\.png|\\.jpg|\\.jpeg|\\.svg|\\.ico|\\.json|\\.txt)$}")
-                .setViewName("forward:/");
+    // Forward all non-API, non-static 404s to React's index.html
+    @RequestMapping("/error")
+    public String handleError() {
+        return "forward:/index.html";
     }
 }
