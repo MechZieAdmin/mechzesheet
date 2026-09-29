@@ -331,7 +331,10 @@ function EmployeeFormModal({
 
  try {
  if (employee) {
- await api.put(`/employees/${employee.id}`, form);
+ const payload: Record<string, any> = { ...form };
+ if (!payload.baseSalary) payload.baseSalary = null;
+ if (!payload.dateOfJoining) payload.dateOfJoining = null;
+ await api.put(`/employees/${employee.id}`, payload);
  toast.success('Employee updated successfully');
  onSuccess();
  } else {
@@ -356,8 +359,8 @@ function EmployeeFormModal({
  <h3 className="text-lg font-semibold text-white mb-2">✅ Employee Created</h3>
  <p className="text-sm text-gpt-muted mb-4">Share these login credentials with the employee securely:</p>
  <div className="bg-slate-50 rounded-lg p-4 font-mono text-sm space-y-2 mb-4">
- <div><span className="text-gpt-muted">Email:</span> <span className="text-white font-semibold">{credentials.email}</span></div>
- <div><span className="text-gpt-muted">Password:</span> <span className="text-white font-semibold">{credentials.tempPassword}</span></div>
+ <div><span className="text-gray-500">Email:</span> <span className="text-gray-900 font-semibold">{credentials.email}</span></div>
+ <div><span className="text-gray-500">Password:</span> <span className="text-gray-900 font-semibold">{credentials.tempPassword}</span></div>
  </div>
  <p className="text-xs text-amber-600 bg-amber-50 rounded-lg p-3 mb-4">
  ⚠️ This password is shown only once. The employee should change it on first login.
